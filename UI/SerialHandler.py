@@ -42,17 +42,16 @@ class SerialHandler():
     serial_instance = serial.Serial()
 
     # True if te last trasfer was a failed retreive_data_rq
-    rx_error_flag = False
-
-    past_sample = 0
-
-    retreive_counter = 0
+    rx_error_flag = False       
     
+    past_sample = 0
+    retreive_counter = 0    
     control_rq_flag = False
+    
 
 
     def __init__(self) -> None:
-        self.get_port()
+        # self.get_port()
         self.rx_package = Package()
         #self.tx_control_package = Package(0,0,0,0,0,0,0,TEST_CALLBACK,0)
         self.tx_control_package = Package()
@@ -75,22 +74,27 @@ class SerialHandler():
     def set_baudrate(self, bauds: str = 115200):
         self.serial_instance.baudrate = bauds
 
-    def get_port(self)->str:
+    def get_port(self)->bool:
         """
         get the port name
         """
 
         ports = serial.tools.list_ports.comports()
-        port_list = []
-            
-        for one_port in ports:
-            port_list.append(str(one_port))
-        self.port_name = (str(port_list[0])).split(" ")[0]
-        print(self.port_name)
+        if len(ports) > 0:
+            port_list = []
+            for one_port in ports:
+                port_list.append(str(one_port))
+            self.port_name = (str(port_list[0])).split(" ")[0]
+            print(self.port_name)
+            return True 
+        else:
+            return False
 
     def open_port(self):
         self.serial_instance.port = self.port_name
         self.serial_instance.open()
+    def close_port(self):
+        self.serial_instance.close()
 
     def synchronize(self):
         #Clear input Buffer
@@ -107,13 +111,18 @@ class SerialHandler():
               data[3] == '00'):
                 sync = False
 
-    def read_package(self)->Package:
+    def read_package(self)->bool:
         """
         CRC calculation, unpack data and retreive corrupt data. 
 
         if 3 or more CRC errors are detected in a row, the system is resynchronized
         """
-        data = self.serial_instance.read_until('END\0',36)
+        try:
+            data = self.serial_instance.read_until('END\0',36)
+        except:
+            return False
+            # Catch exception at closing port while reading data
+
         if(len(data) == 36):
             array=list(map(str, (data .hex(':').split(':')) ))
             #print(array)
@@ -187,6 +196,7 @@ class SerialHandler():
         self.tx_control_package.control_signals = control_signal
         if(control_signal == MULT_CALLBACK):
             self.tx_control_package.sensor1 = data
+            self.tx_control_package
         #self.control_rq_flag = True
 
     def working_loop(self)->bool:
@@ -207,6 +217,7 @@ def main():
     serial_handler = SerialHandler()    
     #print(serial_handler.port_name)
     serial_handler.set_baudrate()
+    serial_handler.get_port()
     serial_handler.open_port()
     serial_handler.synchronize()
 
@@ -223,11 +234,12 @@ def crc_test():
 def default_working():
     serial_handler = SerialHandler()
     serial_handler.set_baudrate()
+    serial_handler.get_port()
     serial_handler.open_port()
     serial_handler.synchronize()
     for i in range(100):
         if(i == 10):
-           serial_handler.control_rq(TEST_CALLBACK)
+           serial_handler.control_rq(TEST_CALLBACK, serial_handler.tx_control_package)
            print("Control Signal")
         flag = serial_handler.working_loop()
         if(flag):
@@ -239,6 +251,7 @@ def retrieving_data_test():
     serial_handler = SerialHandler()    
     #print(serial_handler.port_name)
     serial_handler.set_baudrate()
+    serial_handler.get_port()
     serial_handler.open_port()
     serial_handler.synchronize()
 

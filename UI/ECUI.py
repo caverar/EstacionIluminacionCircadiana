@@ -14,12 +14,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(830, 480)
+        MainWindow.resize(1025, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
-        self.gridLayout_2.setContentsMargins(10, 10, 10, 10)
-        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout_4.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.drop_shadow_frame = QtWidgets.QFrame(self.centralwidget)
         self.drop_shadow_frame.setEnabled(True)
         self.drop_shadow_frame.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(65, 62, 144, 255), stop:0.426316 rgba(42, 40, 93, 255), stop:1 rgba(31, 29, 68, 255));\n"
@@ -98,15 +98,26 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.frame_btns)
         self.verticalLayout.addWidget(self.title_bar)
         self.content_bar = QtWidgets.QFrame(self.drop_shadow_frame)
-        self.content_bar.setStyleSheet("background-color:none;")
+        self.content_bar.setAutoFillBackground(False)
+        self.content_bar.setStyleSheet("background-color:none;\n"
+"border-radius: 0px;\n"
+"")
         self.content_bar.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.content_bar.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.content_bar.setLineWidth(1)
         self.content_bar.setObjectName("content_bar")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.content_bar)
-        self.horizontalLayout_3.setContentsMargins(5, 0, 5, 0)
+        self.horizontalLayout_3.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.tabWidget = QtWidgets.QTabWidget(self.content_bar)
+        self.tabWidget.setEnabled(True)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
+        self.tabWidget.setSizePolicy(sizePolicy)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(85, 255, 127))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -265,6 +276,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(13)
         self.tabWidget.setFont(font)
+        self.tabWidget.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.tabWidget.setAcceptDrops(False)
         self.tabWidget.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.tabWidget.setAutoFillBackground(False)
@@ -272,6 +284,7 @@ class Ui_MainWindow(object):
 "\n"
 "   color: rgb(255, 255, 255);\n"
 "   background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(65, 62, 144, 255), stop:0.426316 rgba(42, 40, 93, 255), stop:1 rgba(31, 29, 68, 255));\n"
+"\n"
 "\n"
 "}\n"
 "QTabWidget{\n"
@@ -283,57 +296,100 @@ class Ui_MainWindow(object):
 "    background-color: rgb(229, 103, 0);\n"
 "    color: rgb(255, 255, 255);\n"
 "\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"")
+"}")
         self.tabWidget.setTabPosition(QtWidgets.QTabWidget.North)
         self.tabWidget.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.tabWidget.setElideMode(QtCore.Qt.ElideNone)
-        self.tabWidget.setUsesScrollButtons(True)
-        self.tabWidget.setDocumentMode(False)
+        self.tabWidget.setUsesScrollButtons(False)
+        self.tabWidget.setDocumentMode(True)
         self.tabWidget.setTabsClosable(False)
         self.tabWidget.setMovable(False)
         self.tabWidget.setTabBarAutoHide(False)
         self.tabWidget.setObjectName("tabWidget")
         self.main_tab = QtWidgets.QWidget()
+        self.main_tab.setEnabled(True)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.main_tab.sizePolicy().hasHeightForWidth())
+        self.main_tab.setSizePolicy(sizePolicy)
         self.main_tab.setAutoFillBackground(False)
-        self.main_tab.setStyleSheet("   background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0       rgba(65, 62, 144, 255), stop:0.426316 rgba(42, 40, 93, 255), stop:1 rgba(31, 29, 68, 255));")
+        self.main_tab.setStyleSheet("")
         self.main_tab.setObjectName("main_tab")
-        self.layoutWidget = QtWidgets.QWidget(self.main_tab)
-        self.layoutWidget.setGeometry(QtCore.QRect(180, 10, 441, 81))
-        self.layoutWidget.setObjectName("layoutWidget")
-        self.gridLayout = QtWidgets.QGridLayout(self.layoutWidget)
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout.setObjectName("gridLayout")
-        self.mult_label = QtWidgets.QLabel(self.layoutWidget)
+        self.verticalLayoutWidget = QtWidgets.QWidget(self.main_tab)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(350, 150, 571, 221))
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.data_plot_layout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.data_plot_layout.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
+        self.data_plot_layout.setContentsMargins(0, 0, 0, 0)
+        self.data_plot_layout.setSpacing(0)
+        self.data_plot_layout.setObjectName("data_plot_layout")
+        self.led_button = QtWidgets.QPushButton(self.main_tab)
+        self.led_button.setGeometry(QtCore.QRect(90, 320, 200, 24))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        font.setStrikeOut(False)
+        self.led_button.setFont(font)
+        self.led_button.setStyleSheet("\n"
+"\n"
+"QPushButton{\n"
+"    border:none;\n"
+"    border-radius: 8px;    \n"
+"    background-color: rgb(229, 103, 0);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"QPushButton:hover{\n"
+"    \n"
+"    background-color: rgba(229, 103, 0, 150);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"    ")
+        self.led_button.setObjectName("led_button")
+        self.connection_button = QtWidgets.QPushButton(self.main_tab)
+        self.connection_button.setGeometry(QtCore.QRect(110, 40, 200, 24))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        font.setStrikeOut(False)
+        self.connection_button.setFont(font)
+        self.connection_button.setStyleSheet("\n"
+"\n"
+"QPushButton{\n"
+"    border:none;\n"
+"    border-radius: 8px;    \n"
+"    background-color: rgb(229, 103, 0);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"QPushButton:hover{\n"
+"    \n"
+"    background-color: rgba(229, 103, 0, 150);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"    ")
+        self.connection_button.setObjectName("connection_button")
+        self.connection_status = QtWidgets.QLabel(self.main_tab)
+        self.connection_status.setGeometry(QtCore.QRect(310, 50, 200, 25))
+        self.connection_status.setMinimumSize(QtCore.QSize(200, 0))
+        self.connection_status.setMaximumSize(QtCore.QSize(20, 16777215))
         font = QtGui.QFont()
         font.setPointSize(18)
-        self.mult_label.setFont(font)
-        self.mult_label.setStyleSheet("background-color: None;\n"
-"color: rgb(80, 255, 240);")
-        self.mult_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.mult_label.setObjectName("mult_label")
-        self.gridLayout.addWidget(self.mult_label, 0, 0, 1, 1)
-        self.mult_data = QtWidgets.QLineEdit(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(13)
-        self.mult_data.setFont(font)
-        self.mult_data.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"")
-        self.mult_data.setAlignment(QtCore.Qt.AlignCenter)
-        self.mult_data.setObjectName("mult_data")
-        self.gridLayout.addWidget(self.mult_data, 0, 1, 1, 1)
-        self.sample_data = QtWidgets.QLabel(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(24)
-        self.sample_data.setFont(font)
-        self.sample_data.setStyleSheet("background-color: None;\n"
-"color: rgb(80, 255, 240);")
-        self.sample_data.setAlignment(QtCore.Qt.AlignCenter)
-        self.sample_data.setObjectName("sample_data")
-        self.gridLayout.addWidget(self.sample_data, 0, 2, 2, 1)
+        self.connection_status.setFont(font)
+        self.connection_status.setStyleSheet("color: rgb(255, 255, 255);")
+        self.connection_status.setAlignment(QtCore.Qt.AlignCenter)
+        self.connection_status.setObjectName("connection_status")
+        self.layoutWidget = QtWidgets.QWidget(self.main_tab)
+        self.layoutWidget.setGeometry(QtCore.QRect(90, 151, 211, 111))
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.layoutWidget)
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.mult_button = QtWidgets.QPushButton(self.layoutWidget)
         font = QtGui.QFont()
         font.setPointSize(15)
@@ -358,35 +414,277 @@ class Ui_MainWindow(object):
 "\n"
 "    ")
         self.mult_button.setObjectName("mult_button")
-        self.gridLayout.addWidget(self.mult_button, 1, 0, 1, 2)
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.main_tab)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(80, 120, 651, 201))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.data_plot_layout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.data_plot_layout.setContentsMargins(0, 0, 0, 0)
-        self.data_plot_layout.setSpacing(0)
-        self.data_plot_layout.setObjectName("data_plot_layout")
+        self.verticalLayout_2.addWidget(self.mult_button)
+        self.mult_data = QtWidgets.QLineEdit(self.layoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        self.mult_data.setFont(font)
+        self.mult_data.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"border-radius: 8px;    ")
+        self.mult_data.setAlignment(QtCore.Qt.AlignCenter)
+        self.mult_data.setObjectName("mult_data")
+        self.verticalLayout_2.addWidget(self.mult_data)
+        self.test_data_label = QtWidgets.QLCDNumber(self.layoutWidget)
+        self.test_data_label.setMinimumSize(QtCore.QSize(17, 50))
+        self.test_data_label.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background-color: None;")
+        self.test_data_label.setObjectName("test_data_label")
+        self.verticalLayout_2.addWidget(self.test_data_label)
+        self.start_serialization_button = QtWidgets.QPushButton(self.main_tab)
+        self.start_serialization_button.setGeometry(QtCore.QRect(520, 40, 200, 24))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        font.setStrikeOut(False)
+        self.start_serialization_button.setFont(font)
+        self.start_serialization_button.setStyleSheet("\n"
+"\n"
+"QPushButton{\n"
+"    border:none;\n"
+"    border-radius: 8px;    \n"
+"    background-color: rgb(229, 103, 0);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"QPushButton:hover{\n"
+"    \n"
+"    background-color: rgba(229, 103, 0, 150);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"    ")
+        self.start_serialization_button.setObjectName("start_serialization_button")
+        self.serialization_status = QtWidgets.QLabel(self.main_tab)
+        self.serialization_status.setGeometry(QtCore.QRect(730, 50, 200, 41))
+        self.serialization_status.setMinimumSize(QtCore.QSize(200, 0))
+        self.serialization_status.setMaximumSize(QtCore.QSize(20, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        self.serialization_status.setFont(font)
+        self.serialization_status.setStyleSheet("color: rgb(255, 255, 255);")
+        self.serialization_status.setAlignment(QtCore.Qt.AlignCenter)
+        self.serialization_status.setObjectName("serialization_status")
+        self.stop_serialization_button = QtWidgets.QPushButton(self.main_tab)
+        self.stop_serialization_button.setGeometry(QtCore.QRect(520, 70, 200, 24))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        font.setStrikeOut(False)
+        self.stop_serialization_button.setFont(font)
+        self.stop_serialization_button.setStyleSheet("\n"
+"\n"
+"QPushButton{\n"
+"    border:none;\n"
+"    border-radius: 8px;    \n"
+"    background-color: rgb(229, 103, 0);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"QPushButton:hover{\n"
+"    \n"
+"    background-color: rgba(229, 103, 0, 150);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"    ")
+        self.stop_serialization_button.setObjectName("stop_serialization_button")
+        self.disconnection_button = QtWidgets.QPushButton(self.main_tab)
+        self.disconnection_button.setGeometry(QtCore.QRect(110, 70, 200, 24))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        font.setStrikeOut(False)
+        self.disconnection_button.setFont(font)
+        self.disconnection_button.setStyleSheet("\n"
+"\n"
+"QPushButton{\n"
+"    border:none;\n"
+"    border-radius: 8px;    \n"
+"    background-color: rgb(229, 103, 0);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"QPushButton:hover{\n"
+"    \n"
+"    background-color: rgba(229, 103, 0, 150);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"    ")
+        self.disconnection_button.setObjectName("disconnection_button")
         self.tabWidget.addTab(self.main_tab, "")
+        self.data_tab = QtWidgets.QWidget()
+        self.data_tab.setAutoFillBackground(False)
+        self.data_tab.setStyleSheet("")
+        self.data_tab.setObjectName("data_tab")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.data_tab)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.scrollArea = QtWidgets.QScrollArea(self.data_tab)
+        self.scrollArea.setMouseTracking(True)
+        self.scrollArea.setTabletTracking(True)
+        self.scrollArea.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
+        self.scrollArea.setAcceptDrops(False)
+        self.scrollArea.setStyleSheet("background:transparent")
+        self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 987, 524))
+        self.scrollAreaWidgetContents.setAutoFillBackground(False)
+        self.scrollAreaWidgetContents.setStyleSheet("")
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.env_temp_frame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
+        self.env_temp_frame.setMinimumSize(QtCore.QSize(0, 250))
+        self.env_temp_frame.setMaximumSize(QtCore.QSize(16777215, 250))
+        self.env_temp_frame.setStyleSheet("")
+        self.env_temp_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.env_temp_frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.env_temp_frame.setObjectName("env_temp_frame")
+        self.gridLayout = QtWidgets.QGridLayout(self.env_temp_frame)
+        self.gridLayout.setObjectName("gridLayout")
+        self.env_temp_data_plot = QtWidgets.QVBoxLayout()
+        self.env_temp_data_plot.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
+        self.env_temp_data_plot.setContentsMargins(-1, -1, 0, -1)
+        self.env_temp_data_plot.setSpacing(0)
+        self.env_temp_data_plot.setObjectName("env_temp_data_plot")
+        self.gridLayout.addLayout(self.env_temp_data_plot, 9, 3, 5, 2)
+        spacerItem = QtWidgets.QSpacerItem(20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        self.gridLayout.addItem(spacerItem, 8, 0, 1, 6)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        self.gridLayout.addItem(spacerItem1, 9, 1, 1, 1)
+        self.label_title_3 = QtWidgets.QLabel(self.env_temp_frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_title_3.sizePolicy().hasHeightForWidth())
+        self.label_title_3.setSizePolicy(sizePolicy)
+        self.label_title_3.setMinimumSize(QtCore.QSize(0, 30))
+        self.label_title_3.setMaximumSize(QtCore.QSize(16777215, 30))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.label_title_3.setFont(font)
+        self.label_title_3.setAutoFillBackground(False)
+        self.label_title_3.setStyleSheet("color: rgb(137, 255, 247);    \n"
+"background-color: None;")
+        self.label_title_3.setObjectName("label_title_3")
+        self.gridLayout.addWidget(self.label_title_3, 0, 0, 1, 6)
+        self.line = QtWidgets.QFrame(self.env_temp_frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.line.sizePolicy().hasHeightForWidth())
+        self.line.setSizePolicy(sizePolicy)
+        self.line.setMaximumSize(QtCore.QSize(16777215, 1))
+        self.line.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background-color: rgb(255, 255, 255);")
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.gridLayout.addWidget(self.line, 1, 0, 1, 6)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem2, 12, 5, 2, 1)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        self.gridLayout.addItem(spacerItem3, 13, 1, 1, 1)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem4, 12, 0, 1, 1)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout.addItem(spacerItem5, 12, 2, 1, 1)
+        self.env_temp_data_lcd = QtWidgets.QLCDNumber(self.env_temp_frame)
+        self.env_temp_data_lcd.setMinimumSize(QtCore.QSize(17, 50))
+        self.env_temp_data_lcd.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.env_temp_data_lcd.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background-color: None;")
+        self.env_temp_data_lcd.setObjectName("env_temp_data_lcd")
+        self.gridLayout.addWidget(self.env_temp_data_lcd, 12, 1, 1, 1)
+        self.verticalLayout_5.addWidget(self.env_temp_frame)
+        self.body_temp_frame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
+        self.body_temp_frame.setMinimumSize(QtCore.QSize(0, 250))
+        self.body_temp_frame.setMaximumSize(QtCore.QSize(16777215, 250))
+        self.body_temp_frame.setStyleSheet("")
+        self.body_temp_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.body_temp_frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.body_temp_frame.setObjectName("body_temp_frame")
+        self.gridLayout_3 = QtWidgets.QGridLayout(self.body_temp_frame)
+        self.gridLayout_3.setObjectName("gridLayout_3")
+        self.body_temp_data_plot = QtWidgets.QVBoxLayout()
+        self.body_temp_data_plot.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
+        self.body_temp_data_plot.setContentsMargins(-1, -1, 0, -1)
+        self.body_temp_data_plot.setSpacing(0)
+        self.body_temp_data_plot.setObjectName("body_temp_data_plot")
+        self.gridLayout_3.addLayout(self.body_temp_data_plot, 9, 3, 5, 2)
+        spacerItem6 = QtWidgets.QSpacerItem(20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        self.gridLayout_3.addItem(spacerItem6, 8, 0, 1, 6)
+        spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        self.gridLayout_3.addItem(spacerItem7, 9, 1, 1, 1)
+        self.label_title_5 = QtWidgets.QLabel(self.body_temp_frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_title_5.sizePolicy().hasHeightForWidth())
+        self.label_title_5.setSizePolicy(sizePolicy)
+        self.label_title_5.setMinimumSize(QtCore.QSize(0, 30))
+        self.label_title_5.setMaximumSize(QtCore.QSize(16777215, 30))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.label_title_5.setFont(font)
+        self.label_title_5.setAutoFillBackground(False)
+        self.label_title_5.setStyleSheet("color: rgb(137, 255, 247);    \n"
+"background-color: None;")
+        self.label_title_5.setObjectName("label_title_5")
+        self.gridLayout_3.addWidget(self.label_title_5, 0, 0, 1, 6)
+        self.line_3 = QtWidgets.QFrame(self.body_temp_frame)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.line_3.sizePolicy().hasHeightForWidth())
+        self.line_3.setSizePolicy(sizePolicy)
+        self.line_3.setMaximumSize(QtCore.QSize(16777215, 1))
+        self.line_3.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background-color: rgb(255, 255, 255);")
+        self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3.setObjectName("line_3")
+        self.gridLayout_3.addWidget(self.line_3, 1, 0, 1, 6)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_3.addItem(spacerItem8, 12, 5, 2, 1)
+        spacerItem9 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        self.gridLayout_3.addItem(spacerItem9, 13, 1, 1, 1)
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_3.addItem(spacerItem10, 12, 0, 1, 1)
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_3.addItem(spacerItem11, 12, 2, 1, 1)
+        self.body_temp_data_lcd = QtWidgets.QLCDNumber(self.body_temp_frame)
+        self.body_temp_data_lcd.setMinimumSize(QtCore.QSize(17, 50))
+        self.body_temp_data_lcd.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.body_temp_data_lcd.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background-color: None;")
+        self.body_temp_data_lcd.setObjectName("body_temp_data_lcd")
+        self.gridLayout_3.addWidget(self.body_temp_data_lcd, 12, 1, 1, 1)
+        self.verticalLayout_5.addWidget(self.body_temp_frame)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.verticalLayout_3.addWidget(self.scrollArea)
+        self.tabWidget.addTab(self.data_tab, "")
         self.config_tab = QtWidgets.QWidget()
-        self.config_tab.setStyleSheet("   background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0       rgba(65, 62, 144, 255), stop:0.426316 rgba(42, 40, 93, 255), stop:1 rgba(31, 29, 68, 255));")
+        self.config_tab.setStyleSheet("")
         self.config_tab.setObjectName("config_tab")
-        self.led_button = QtWidgets.QPushButton(self.config_tab)
-        self.led_button.setGeometry(QtCore.QRect(40, 30, 91, 31))
-        self.led_button.setStyleSheet("    background-color: rgb(229, 103, 0);\n"
-"    color: rgb(255, 255, 255);")
-        self.led_button.setObjectName("led_button")
         self.tabWidget.addTab(self.config_tab, "")
         self.horizontalLayout_3.addWidget(self.tabWidget)
         self.verticalLayout.addWidget(self.content_bar)
         self.credits_bar = QtWidgets.QFrame(self.drop_shadow_frame)
         self.credits_bar.setMinimumSize(QtCore.QSize(0, 30))
-        self.credits_bar.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.credits_bar.setMaximumSize(QtCore.QSize(16777215, 45))
         self.credits_bar.setStyleSheet("background-color:none;")
         self.credits_bar.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.credits_bar.setFrameShadow(QtWidgets.QFrame.Raised)
         self.credits_bar.setObjectName("credits_bar")
         self.verticalLayout.addWidget(self.credits_bar)
-        self.gridLayout_2.addWidget(self.drop_shadow_frame, 0, 0, 1, 1)
+        self.verticalLayout_4.addWidget(self.drop_shadow_frame)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -399,12 +697,19 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label_title.setText(_translate("MainWindow", "CircadianL"))
-        self.mult_label.setText(_translate("MainWindow", "valor"))
+        self.led_button.setText(_translate("MainWindow", "Test LED"))
+        self.connection_button.setText(_translate("MainWindow", "Conectar"))
+        self.connection_status.setText(_translate("MainWindow", "Desconectado"))
+        self.mult_button.setText(_translate("MainWindow", "Ajustar Multiplicador"))
         self.mult_data.setText(_translate("MainWindow", "1"))
-        self.sample_data.setText(_translate("MainWindow", "Valor 12345"))
-        self.mult_button.setText(_translate("MainWindow", "Ajustar"))
+        self.start_serialization_button.setText(_translate("MainWindow", "Iniciar registro"))
+        self.serialization_status.setText(_translate("MainWindow", "Detenido"))
+        self.stop_serialization_button.setText(_translate("MainWindow", "Detener registro"))
+        self.disconnection_button.setText(_translate("MainWindow", "Desconectar"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.main_tab), _translate("MainWindow", "Home"))
-        self.led_button.setText(_translate("MainWindow", "Xor Led"))
+        self.label_title_3.setText(_translate("MainWindow", "Temperatura Ambiente"))
+        self.label_title_5.setText(_translate("MainWindow", "Temperatura Corporal"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.data_tab), _translate("MainWindow", "Datos"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.config_tab), _translate("MainWindow", "Configuración"))
 
 
